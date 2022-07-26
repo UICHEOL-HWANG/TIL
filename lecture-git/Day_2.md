@@ -12,6 +12,8 @@
 4. 브랜치 생성과 동시에 이동
 `git switch -c 브랜치 명`
 
+---- 
+
 5. 브랜치 삭제
 `git branch -d 브랜치명`
 `git branch -D 브랜치명`
