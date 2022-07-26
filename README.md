@@ -46,4 +46,3 @@ git diff 해쉬값 해쉬값
 9. github에 local commits 올리기
 
     `git push origin master`
-
