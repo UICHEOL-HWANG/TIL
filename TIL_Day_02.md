@@ -49,3 +49,92 @@ clone과 pull이 모두 원격 저장소로부터 가져오는 명령어라서 �
 
 </aside>
 
+### (3) git clone
+
+> 여러분은 이제 강의장에 왔습니다. 강의장 컴퓨터에는 여러분의 TIL 폴더가 없습니다.
+> 
+- Github에 있는 `TIL-remote`에서 `git clone`을 통해 내려 받습니다.
+    
+    ```bash
+    # TIL-class
+    
+    $ git clone https://github.com/edukyle/TIL-remote.git TIL-class
+    ```
+    
+    **원격 저장소는 `TIL-remote` 이지만, 위와 같이 작성하면 강의장 컴퓨터에는 `TIL-class`라는 이름으로 로컬 저장소가 생성됩니다. (내부 파일 내용은 똑같습니다. 단지 폴더의 이름만 바뀝니다.)**
+    
+- 결과
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/132461a5-d490-4417-b8e4-11d82d1a0252/Untitled.png)
+    
+
+### (4) git push
+
+> 강의장 컴퓨터 → 원격 저장소
+> 
+- 강의장에서 새로운 파일을 만들고 원격 저장소에 업로드 합니다.
+    
+    ```bash
+    # TIL-class
+    
+    $ touch day2.md
+    $ git add .
+    $ git commit -m "강의장에서 Day2 작성"
+    $ git push origin master
+    ```
+    
+- 결과
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/13e9eb36-2521-41d1-9b7a-181204c8983b/Untitled.png)
+    
+
+### (5) git pull
+
+> 원격 저장소 → 내 컴퓨터
+> 
+- 내 컴퓨터에는 day2.md가 없습니다. 왜냐하면 강의장 컴퓨터에서 day2.md를 만들어서 원격 저장소에 push 했기 때문입니다. 따라서 원격 저장소에서 day2.md에 대한 내역을 가져와야 합니다.
+    
+    ```bash
+    # TIL-home
+    
+    $ git pull origin master
+    ```
+    
+- 결과
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0ec0a1de-5218-428b-b6e7-24d9221eb1fd/Untitled.png)
+    
+    이제 `내 컴퓨터, Github, 강의장 컴퓨터`의 내용은 동일합니다.
+    
+- **주의 사항**
+    
+    <aside>
+    ❗ **만약 TIL-home에서 pull이 아니라 commit을 먼저한 후 pull을 하면 어떻게 될까요?
+    다음 세 가지의 경우가 있을 수 있습니다.**
+    
+    1. 내 컴퓨터와 강의장 컴퓨터에서 **서로 다른 파일을 수정**한 경우
+    → 정상적으로 git pull이 됩니다.
+    
+    2. 내 컴퓨터와 강의장 컴퓨터에서 **같은 파일을 수정했지만, 수정한 라인이 다른** 경우
+    → 정상적으로 git pull이 됩니다.
+    
+    3. 내 컴퓨터와 강의장 컴퓨터에서 **같은 파일의 같은 라인**을 수정한 경우
+    → **충돌(conflict)**이 발생합니다. 어느 내용을 반영할지 직접 선택해야 합니다.
+    
+    </aside>
+    
+    <aside>
+    ❗ **만약 TIL-home에서 pull이 아니라 commit을 먼저한 후 바로 push 하면 어떻게 될까요?**
+    **아래와 같은 에러 메시지가 나타나면서 push가 실패합니다.**
+    
+    To https://github.com/edukyle/TIL-remote.git
+    
+    ! [rejected]        master -> master (non-fast-forward)
+    
+    error: failed to push some refs to 'https://github.com/edukyle/TIL-remote.git'
+    
+    원격 저장소의 내용을 먼저 받아오지 않고, 로컬 저장소에서 새로운 커밋을 생성했기 때문에 서로의 커밋 내역이 달라져서 그렇습니다.
+    
+    만약 로컬 저장소와 원격 저장소의 내용이 다르다면 일단 git pull을 통해 동기화를 시키고 새로운 커밋을 쌓아 나가야 합니다.
+    
+    </aside>
