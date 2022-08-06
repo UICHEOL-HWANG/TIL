@@ -102,9 +102,29 @@ DENSE_RANK() 같은 경우에는 중복값 이후 다음 값도 매겨줌
 연속적 등수도 나온다 
 
 
-``` SQL
-N_TILE 
- 
 ```
+
+``` SQL
+SELECT EMPNO, ENAME , SAL.
+SUM(SAL) OVER (ORDER BY SAL , ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ) TOTSAL 연봉순으로 집계를 할건데 첫 행부터 끝행까지의 SUM(SAL)합을 구한단 뜻 
+
+FROM EMP ;
+
+SELECT EMPNO, ENAME, SAL,
+  SUM(SAL) OVER (ORDER BY SAL
+  ROWS BETWEEN UNBOUNDED PRECEDING
+  AND CURRENT ROW) TOTSAL
+FROM EMP;
+# 이 경우 첫 행을 지정한 UNBOUNDED 부터 끝 지점을 CURRENT ROW로 지정했을때 
+TOTSAL의 누적합계를 나타냄 
+
+```
+
+``` SQL
+
+SELECT 고객명, 고객번호,NVL(생년,9999) AS 정답칼럼 
+FROM c_INFO 
+
+# NVL(A,B) NVL은 A값이 NULL 값이면 B출력 아니면 A값을 출력 
 
 ```
