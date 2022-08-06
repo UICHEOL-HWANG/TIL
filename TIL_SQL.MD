@@ -67,7 +67,6 @@ WHERE C2 >= 200 AND C1 ="B"
 ``` SQL
 순위 함수 : RANK() DENSE_RANK()
 ROW_NUMBER()
-
 SELECT WINDOW() OVER(PARTITION BY 
 ORDER BY 
 ROWS, RANGE ) 
@@ -85,5 +84,27 @@ ROWS
 ROWS UNBOUNDED PRECEDING <- 맨 위에서 행부터 지금행까지 연산을 실시하자
 
 
-1. JOB별로 연봉의 합계를 가져올건데 
+> 1. JOB별로 연봉의 합계를 가져올건데 JOB별 누적합계
+```
+
+``` SQL
+
+RANK()함수 
+SELECT ENAME , SAL,RANK() OVER(ORDER BY SAL) AS RANK 
+FROM EMP ; 
+
+연속되지 않은 RANK값이 나옴 
+중복 순위가 나오면 그냥 다음 값으로 넘어감 
+예) 1,2,3,4,4,6 
+DENSE_RANK()
+예) 1,2,3,4,4,5,
+DENSE_RANK() 같은 경우에는 중복값 이후 다음 값도 매겨줌
+연속적 등수도 나온다 
+
+
+``` SQL
+N_TILE 
+ 
+```
+
 ```
