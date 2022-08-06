@@ -1,0 +1,89 @@
+### SQL 서브쿼리 
+
+``` SQL
+스칼라 서브쿼리 
+반드시 1행 1열로만 반환 해야하고 그렇지 않으면 오류 발생 
+
+SELECT SAL 
+(SELECT AVG(SAL)
+FROM EMP)
+FROM EMP; 예시 
+
+
+```
+
+``` SQL 
+SELECT * 인라인 뷰 
+FROM (SELECT ROWNUM AS NUM ENAME FROM MP)
+WHERE NUM < 5; 
+``` 
+EX) 가상의 테이블을 생성하여 EMP 테이블 상위 4명의 사원 이름 생성 
+
+예제 
+
+``` SQL
+C1        
+A
+A
+B
+B
+B
+NULL 
+
+C2 
+100
+200
+100
+NULL
+200 
+
+
+CREATE VIEW V_TBL 
+AS 
+SELECT * 
+FROM TBL 
+WHERE C1 = "B" OR C1 IS NULL 
+#생성 
+
+C1 C2 
+B 200
+B 100
+B NULL 
+NULL 200 
+V_TBL 생성 
+
+B 200 
+
+
+조회 SQL 
+SELECT SUM(C2) C2 
+FROM V_TBL
+WHERE C2 >= 200 AND C1 ="B"
+``` 
+
+
+> WINDOW 함수 
+
+``` SQL
+순위 함수 : RANK() DENSE_RANK()
+ROW_NUMBER()
+
+SELECT WINDOW() OVER(PARTITION BY 
+ORDER BY 
+ROWS, RANGE ) 
+FROM TABEL ; 
+```
+
+```SQL
+SELECT JOB , SUM(SAL) OVER (PARTITION BY JOB 
+ORDER BY SAL DESC 
+ROWS UNBOUNDED PRECEDING) AS SUM_SAL 
+PARTITION BY JOB 1. JOB별로 나누어서 
+ORDER BY SAL DESC 연봉별로 오름차순으로 나눔 
+ROWS 
+
+ROWS UNBOUNDED PRECEDING <- 맨 위에서 행부터 지금행까지 연산을 실시하자
+
+
+1. JOB별로 연봉의 합계를 가져올건데 
+```
